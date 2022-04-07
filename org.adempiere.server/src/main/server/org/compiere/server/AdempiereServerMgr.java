@@ -118,8 +118,13 @@ public class AdempiereServerMgr implements ServiceTrackerCustomizer<IServerFacto
 		Adempiere.startup(false);
 		log.info("");
 		
-		//	Set Session
-		MSession session = MSession.get(getCtx(), true, false);
+		//	Set Session		
+		MSession session = MSession.get(getCtx());
+		if(session == null) {
+			session = MSession.create(getCtx());
+		} else {
+			session = new MSession(getCtx(), session.getAD_Session_ID(), null);
+		}
 		session.setWebStoreSession(false);
 		session.setWebSession("Server");
 		session.saveEx();
