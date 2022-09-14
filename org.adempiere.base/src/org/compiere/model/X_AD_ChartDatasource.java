@@ -31,7 +31,7 @@ public class X_AD_ChartDatasource extends PO implements I_AD_ChartDatasource, I_
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220324L;
+	private static final long serialVersionUID = 20220914L;
 
     /** Standard Constructor */
     public X_AD_ChartDatasource (Properties ctx, int AD_ChartDatasource_ID, String trxName)
@@ -39,8 +39,8 @@ public class X_AD_ChartDatasource extends PO implements I_AD_ChartDatasource, I_
       super (ctx, AD_ChartDatasource_ID, trxName);
       /** if (AD_ChartDatasource_ID == 0)
         {
-			setAD_Chart_ID (0);
 			setAD_ChartDatasource_ID (0);
+			setAD_Chart_ID (0);
 			setEntityType (null);
 // @SQL=SELECT CASE WHEN '@P|AdempiereSys:N@'='Y' THEN 'D' ELSE get_sysconfig('DEFAULT_ENTITYTYPE','U',0,0) END FROM Dual
 			setFromClause (null);
@@ -55,8 +55,8 @@ public class X_AD_ChartDatasource extends PO implements I_AD_ChartDatasource, I_
       super (ctx, AD_ChartDatasource_ID, trxName, virtualColumns);
       /** if (AD_ChartDatasource_ID == 0)
         {
-			setAD_Chart_ID (0);
 			setAD_ChartDatasource_ID (0);
+			setAD_Chart_ID (0);
 			setEntityType (null);
 // @SQL=SELECT CASE WHEN '@P|AdempiereSys:N@'='Y' THEN 'D' ELSE get_sysconfig('DEFAULT_ENTITYTYPE','U',0,0) END FROM Dual
 			setFromClause (null);
@@ -93,33 +93,6 @@ public class X_AD_ChartDatasource extends PO implements I_AD_ChartDatasource, I_
       return sb.toString();
     }
 
-	public org.compiere.model.I_AD_Chart getAD_Chart() throws RuntimeException
-	{
-		return (org.compiere.model.I_AD_Chart)MTable.get(getCtx(), org.compiere.model.I_AD_Chart.Table_ID)
-			.getPO(getAD_Chart_ID(), get_TrxName());
-	}
-
-	/** Set Chart.
-		@param AD_Chart_ID Chart
-	*/
-	public void setAD_Chart_ID (int AD_Chart_ID)
-	{
-		if (AD_Chart_ID < 1)
-			set_ValueNoCheck (COLUMNNAME_AD_Chart_ID, null);
-		else
-			set_ValueNoCheck (COLUMNNAME_AD_Chart_ID, Integer.valueOf(AD_Chart_ID));
-	}
-
-	/** Get Chart.
-		@return Chart	  */
-	public int getAD_Chart_ID()
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_AD_Chart_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	/** Set Chart Datasource.
 		@param AD_ChartDatasource_ID Chart Datasource
 	*/
@@ -154,6 +127,55 @@ public class X_AD_ChartDatasource extends PO implements I_AD_ChartDatasource, I_
 	public String getAD_ChartDatasource_UU()
 	{
 		return (String)get_Value(COLUMNNAME_AD_ChartDatasource_UU);
+	}
+
+	/** AD_Chart_Axis_Y AD_Reference_ID=200211 */
+	public static final int AD_CHART_AXIS_Y_AD_Reference_ID=200211;
+	/** Primary Y- axis = PRI */
+	public static final String AD_CHART_AXIS_Y_PrimaryY_Axis = "PRI";
+	/** Secondary Y Axis = SEC */
+	public static final String AD_CHART_AXIS_Y_SecondaryYAxis = "SEC";
+	/** Set Axis Y.
+		@param AD_Chart_Axis_Y Axis Y
+	*/
+	public void setAD_Chart_Axis_Y (String AD_Chart_Axis_Y)
+	{
+
+		set_Value (COLUMNNAME_AD_Chart_Axis_Y, AD_Chart_Axis_Y);
+	}
+
+	/** Get Axis Y.
+		@return Axis Y	  */
+	public String getAD_Chart_Axis_Y()
+	{
+		return (String)get_Value(COLUMNNAME_AD_Chart_Axis_Y);
+	}
+
+	public org.compiere.model.I_AD_Chart getAD_Chart() throws RuntimeException
+	{
+		return (org.compiere.model.I_AD_Chart)MTable.get(getCtx(), org.compiere.model.I_AD_Chart.Table_ID)
+			.getPO(getAD_Chart_ID(), get_TrxName());
+	}
+
+	/** Set Chart.
+		@param AD_Chart_ID Chart
+	*/
+	public void setAD_Chart_ID (int AD_Chart_ID)
+	{
+		if (AD_Chart_ID < 1)
+			set_ValueNoCheck (COLUMNNAME_AD_Chart_ID, null);
+		else
+			set_ValueNoCheck (COLUMNNAME_AD_Chart_ID, Integer.valueOf(AD_Chart_ID));
+	}
+
+	/** Get Chart.
+		@return Chart	  */
+	public int getAD_Chart_ID()
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_AD_Chart_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
 	}
 
 	public org.compiere.model.I_AD_Table getAD_Table() throws RuntimeException
@@ -198,6 +220,37 @@ public class X_AD_ChartDatasource extends PO implements I_AD_ChartDatasource, I_
 	public String getCategoryColumn()
 	{
 		return (String)get_Value(COLUMNNAME_CategoryColumn);
+	}
+
+	/** ChartType AD_Reference_ID=53315 */
+	public static final int CHARTTYPE_AD_Reference_ID=53315;
+	/** Area Chart = AC */
+	public static final String CHARTTYPE_AreaChart = "AC";
+	/** Bar Chart = BC */
+	public static final String CHARTTYPE_BarChart = "BC";
+	/** Line Chart = LC */
+	public static final String CHARTTYPE_LineChart = "LC";
+	/** Pie Chart = PC */
+	public static final String CHARTTYPE_PieChart = "PC";
+	/** Ring Chart = RC */
+	public static final String CHARTTYPE_RingChart = "RC";
+	/** Waterfall Chart = WC */
+	public static final String CHARTTYPE_WaterfallChart = "WC";
+	/** Set Chart Type.
+		@param ChartType Type of chart to render
+	*/
+	public void setChartType (String ChartType)
+	{
+
+		set_Value (COLUMNNAME_ChartType, ChartType);
+	}
+
+	/** Get Chart Type.
+		@return Type of chart to render
+	  */
+	public String getChartType()
+	{
+		return (String)get_Value(COLUMNNAME_ChartType);
 	}
 
 	/** Set Date Column.
