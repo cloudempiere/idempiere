@@ -52,3 +52,28 @@ UPDATE AD_Field SET IsDisplayed='Y', SeqNo=180, AD_Reference_Value_ID=NULL, AD_V
 -- Sep 14, 2022, 10:02:26 AM CEST
 UPDATE AD_Field SET SeqNo=190, AD_Reference_Value_ID=NULL, AD_Val_Rule_ID=NULL, IsToolbarButton=NULL,Updated=TO_TIMESTAMP('2022-09-14 10:02:26','YYYY-MM-DD HH24:MI:SS'),UpdatedBy=100 WHERE AD_Field_ID=59604
 ;
+
+-- Sep 14, 2022, 10:25:38 AM CEST
+INSERT INTO AD_Reference (AD_Reference_ID,Name,Description,ValidationType,AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,EntityType,IsOrderByValue,AD_Reference_UU) VALUES (200212,'AD_ChartDatasource ChartType','Chart Type for Chart Datasource','L',0,0,'Y',TO_TIMESTAMP('2022-09-14 10:25:37','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2022-09-14 10:25:37','YYYY-MM-DD HH24:MI:SS'),100,'D','N','b509fdb0-a65d-4964-9bea-61df6cc6a365')
+;
+
+-- Sep 14, 2022, 10:25:51 AM CEST
+INSERT INTO AD_Ref_List (AD_Ref_List_ID,Name,AD_Reference_ID,Value,AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,EntityType,AD_Ref_List_UU) VALUES (200552,'Area Chart',200212,'AC',0,0,'Y',TO_TIMESTAMP('2022-09-14 10:25:51','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2022-09-14 10:25:51','YYYY-MM-DD HH24:MI:SS'),100,'D','18de57d9-1562-4efe-9f44-bf5ed5143950')
+;
+
+-- Sep 14, 2022, 10:26:02 AM CEST
+INSERT INTO AD_Ref_List (AD_Ref_List_ID,Name,AD_Reference_ID,Value,AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,EntityType,AD_Ref_List_UU) VALUES (200553,'Bar Chart',200212,'BC',0,0,'Y',TO_TIMESTAMP('2022-09-14 10:26:02','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2022-09-14 10:26:02','YYYY-MM-DD HH24:MI:SS'),100,'D','d2422608-ba55-436d-a78f-6f6d3b8c6c75')
+;
+
+-- Sep 14, 2022, 10:26:17 AM CEST
+INSERT INTO AD_Ref_List (AD_Ref_List_ID,Name,AD_Reference_ID,Value,AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,EntityType,AD_Ref_List_UU) VALUES (200554,'Line Chart',200212,'LC',0,0,'Y',TO_TIMESTAMP('2022-09-14 10:26:17','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2022-09-14 10:26:17','YYYY-MM-DD HH24:MI:SS'),100,'D','7b67ab91-c064-4209-85bd-39ed0b69f766')
+;
+
+-- Sep 14, 2022, 10:26:37 AM CEST
+UPDATE AD_Column SET AD_Reference_Value_ID=200212,Updated=TO_TIMESTAMP('2022-09-14 10:26:37','YYYY-MM-DD HH24:MI:SS'),UpdatedBy=100 WHERE AD_Column_ID=215353
+;
+
+-- Sep 14, 2022, 10:29:36 AM CEST
+UPDATE AD_Column SET IsMandatory='Y',Updated=TO_TIMESTAMP('2022-09-14 10:29:36','YYYY-MM-DD HH24:MI:SS'),UpdatedBy=100 WHERE AD_Column_ID=215354
+;
+
