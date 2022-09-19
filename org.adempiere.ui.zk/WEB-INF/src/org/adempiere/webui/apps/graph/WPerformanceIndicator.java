@@ -125,7 +125,7 @@ public class WPerformanceIndicator extends Panel implements EventListener<Event>
 	private void init()
 	{								
 		// Set Text
-		StringBuilder text = new StringBuilder(m_goal.getName());
+		StringBuilder text = new StringBuilder(m_goal.get_Translation(MGoal.COLUMNNAME_Name));
 		if (m_goal.isTarget())
 			text.append(": ").append(m_goal.getPercent()).append("%");
 		else

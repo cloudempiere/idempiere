@@ -359,6 +359,17 @@ public interface I_PA_DashboardContent
 
 	public org.compiere.model.I_PA_Goal getPA_Goal() throws RuntimeException;
 
+    /** Column name PA_Goal_Set_ID */
+    public static final String COLUMNNAME_PA_Goal_Set_ID = "PA_Goal_Set_ID";
+
+	/** Set Performance Measure Set	  */
+	public void setPA_Goal_Set_ID (int PA_Goal_Set_ID);
+
+	/** Get Performance Measure Set	  */
+	public int getPA_Goal_Set_ID();
+
+	public org.compiere.model.I_PA_Goal_Set getPA_Goal_Set() throws RuntimeException;
+
     /** Column name ProcessParameters */
     public static final String COLUMNNAME_ProcessParameters = "ProcessParameters";
 

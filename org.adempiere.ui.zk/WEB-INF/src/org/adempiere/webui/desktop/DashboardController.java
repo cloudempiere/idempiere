@@ -43,6 +43,7 @@ import org.adempiere.webui.apps.graph.WPerformanceDetail;
 import org.adempiere.webui.apps.graph.WPerformanceIndicator;
 import org.adempiere.webui.apps.graph.model.ChartModel;
 import org.adempiere.webui.component.ToolBarButton;
+import org.adempiere.webui.dashboard.DPPerformanceGoalSet;
 import org.adempiere.webui.dashboard.DashboardPanel;
 import org.adempiere.webui.dashboard.DashboardRunnable;
 import org.adempiere.webui.report.HTMLExtension;
@@ -777,6 +778,15 @@ public class DashboardController implements EventListener<Event> {
     		div.setSclass("statusline-gadget");
     		((HtmlBasedComponent) content.getParent()).setSclass("statusline-wrapper");
     		content.appendChild(div);
+    		empty = false;
+    	}
+    	
+    	// Goal Set
+    	final int PA_Goal_Set_ID = dc.getPA_Goal_Set_ID();
+    	if(PA_Goal_Set_ID > 0) {
+    		DPPerformanceGoalSet performanceGoalSet = new DPPerformanceGoalSet(PA_Goal_Set_ID);
+    		addDashboardPanel(performanceGoalSet);
+    		content.appendChild(performanceGoalSet);
     		empty = false;
     	}
 

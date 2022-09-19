@@ -572,8 +572,21 @@ public class MGoal extends X_PA_Goal
 				if (AD_Role_ID == 0)		//	set to first one
 					setAD_Role_ID(roles[0].getAD_Role_ID());
 			}	//	multiple roles
+			
+			
 		}	//	user check
 
+		//TODO for testing
+		if(is_ValueChanged(COLUMNNAME_MeasureTarget) || is_ValueChanged(COLUMNNAME_MeasureActual)) {
+			BigDecimal diff = getMeasureTarget().subtract(getMeasureActual());
+			BigDecimal divisor = diff.equals(Env.ZERO) ? getMeasureActual() : diff;
+			if(!divisor.equals(Env.ZERO)) {
+				BigDecimal returnVal = (diff.divide(getMeasureTarget(), 4, RoundingMode.HALF_UP)).stripTrailingZeros();
+//				if(getMeasureActual().compareTo(getMeasureTarget()) < 0)
+					returnVal = returnVal.negate();
+				setGoalRelativeChange(returnVal);
+			}
+		}
 		return true;
 	}	//	beforeSave
 

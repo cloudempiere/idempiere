@@ -26,7 +26,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Model for PA_Goal
  *  @author iDempiere (generated) 
- *  @version Release 9 - $Id$ */
+ *  @version Release 10 - $Id$ */
 @org.adempiere.base.Model(table="PA_Goal")
 public class X_PA_Goal extends PO implements I_PA_Goal, I_Persistent 
 {
@@ -34,7 +34,7 @@ public class X_PA_Goal extends PO implements I_PA_Goal, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220116L;
+	private static final long serialVersionUID = 20220919L;
 
     /** Standard Constructor */
     public X_PA_Goal (Properties ctx, int PA_Goal_ID, String trxName)
@@ -278,6 +278,49 @@ public class X_PA_Goal extends PO implements I_PA_Goal, I_Persistent
 		return bd;
 	}
 
+	/** Set Goal Relative Change.
+		@param GoalRelativeChange Goal Relative Change
+	*/
+	public void setGoalRelativeChange (BigDecimal GoalRelativeChange)
+	{
+		set_Value (COLUMNNAME_GoalRelativeChange, GoalRelativeChange);
+	}
+
+	/** Get Goal Relative Change.
+		@return Goal Relative Change	  */
+	public BigDecimal getGoalRelativeChange()
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_GoalRelativeChange);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
+	/** GoalTargetType AD_Reference_ID=200209 */
+	public static final int GOALTARGETTYPE_AD_Reference_ID=200209;
+	/** Manual = M */
+	public static final String GOALTARGETTYPE_Goal = "G";
+	/** Period Calculated Actual Measure = P */
+	public static final String GOALTARGETTYPE_PeriodCalculatedActualMeasure = "P";
+	/** Target Measure = T */
+	public static final String GOALTARGETTYPE_TargetMeasure = "T";
+	/** Set Goal Target Type.
+		@param GoalTargetType Defined behaviour between target and measured values
+	*/
+	public void setGoalTargetType (String GoalTargetType)
+	{
+
+		set_Value (COLUMNNAME_GoalTargetType, GoalTargetType);
+	}
+
+	/** Get Goal Target Type.
+		@return Defined behaviour between target and measured values
+	  */
+	public String getGoalTargetType()
+	{
+		return (String)get_Value(COLUMNNAME_GoalTargetType);
+	}
+
 	/** Set Summary Level.
 		@param IsSummary This is a summary entity
 	*/
@@ -349,6 +392,29 @@ public class X_PA_Goal extends PO implements I_PA_Goal, I_Persistent
 	public String getMeasureDisplay()
 	{
 		return (String)get_Value(COLUMNNAME_MeasureDisplay);
+	}
+
+	/** MeasureDisplayType AD_Reference_ID=200210 */
+	public static final int MEASUREDISPLAYTYPE_AD_Reference_ID=200210;
+	/** Actual Value = A */
+	public static final String MEASUREDISPLAYTYPE_ActualValue = "A";
+	/** Percentage (%) = P */
+	public static final String MEASUREDISPLAYTYPE_Percentage = "P";
+	/** Set Measure Display Type.
+		@param MeasureDisplayType The Measure Display Type indicates how performance indicator represent the measured data. Available options are Percentage and Actual Values.
+	*/
+	public void setMeasureDisplayType (String MeasureDisplayType)
+	{
+
+		set_Value (COLUMNNAME_MeasureDisplayType, MeasureDisplayType);
+	}
+
+	/** Get Measure Display Type.
+		@return The Measure Display Type indicates how performance indicator represent the measured data. Available options are Percentage and Actual Values.
+	  */
+	public String getMeasureDisplayType()
+	{
+		return (String)get_Value(COLUMNNAME_MeasureDisplayType);
 	}
 
 	/** MeasureScope AD_Reference_ID=367 */
@@ -469,28 +535,6 @@ public class X_PA_Goal extends PO implements I_PA_Goal, I_Persistent
 		return ii.intValue();
 	}
 
-	/** Set Goal.
-		@param PA_Goal_ID Performance Goal
-	*/
-	public void setPA_Goal_ID (int PA_Goal_ID)
-	{
-		if (PA_Goal_ID < 1)
-			set_ValueNoCheck (COLUMNNAME_PA_Goal_ID, null);
-		else
-			set_ValueNoCheck (COLUMNNAME_PA_Goal_ID, Integer.valueOf(PA_Goal_ID));
-	}
-
-	/** Get Goal.
-		@return Performance Goal
-	  */
-	public int getPA_Goal_ID()
-	{
-		Integer ii = (Integer)get_Value(COLUMNNAME_PA_Goal_ID);
-		if (ii == null)
-			 return 0;
-		return ii.intValue();
-	}
-
 	public org.compiere.model.I_PA_Goal getPA_GoalParent() throws RuntimeException
 	{
 		return (org.compiere.model.I_PA_Goal)MTable.get(getCtx(), org.compiere.model.I_PA_Goal.Table_ID)
@@ -514,6 +558,28 @@ public class X_PA_Goal extends PO implements I_PA_Goal, I_Persistent
 	public int getPA_GoalParent_ID()
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_PA_GoalParent_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	/** Set Goal.
+		@param PA_Goal_ID Performance Goal
+	*/
+	public void setPA_Goal_ID (int PA_Goal_ID)
+	{
+		if (PA_Goal_ID < 1)
+			set_ValueNoCheck (COLUMNNAME_PA_Goal_ID, null);
+		else
+			set_ValueNoCheck (COLUMNNAME_PA_Goal_ID, Integer.valueOf(PA_Goal_ID));
+	}
+
+	/** Get Goal.
+		@return Performance Goal
+	  */
+	public int getPA_Goal_ID()
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_PA_Goal_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -595,6 +661,25 @@ public class X_PA_Goal extends PO implements I_PA_Goal, I_Persistent
 	public int getSeqNo()
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_SeqNo);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	/** Set Time Offset.
+		@param TimeOffset Number of time units to offset displayed chart data from the current date.
+	*/
+	public void setTimeOffset (int TimeOffset)
+	{
+		set_Value (COLUMNNAME_TimeOffset, Integer.valueOf(TimeOffset));
+	}
+
+	/** Get Time Offset.
+		@return Number of time units to offset displayed chart data from the current date.
+	  */
+	public int getTimeOffset()
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_TimeOffset);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();

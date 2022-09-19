@@ -336,3 +336,24 @@
 .desktop-home-tabpanel .z-hlayout-inner {
 	padding: 5px !important;
 }
+
+.goal-set-panel {
+	height: 100% !important;
+}
+
+.goal-set-panel .highlighted-grid {
+	border: none;
+}
+
+.goal-set-panel .table-grid {
+	padding: 5px;
+	margin: 15px;
+}
+
+.cell-clickable {
+	cursor: pointer;
+}
+
+.kpi-color-blue-dark {
+	color: #3B61B9;
+}

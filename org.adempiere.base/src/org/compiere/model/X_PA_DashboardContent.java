@@ -33,7 +33,7 @@ public class X_PA_DashboardContent extends PO implements I_PA_DashboardContent, 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220907L;
+	private static final long serialVersionUID = 20220913L;
 
     /** Standard Constructor */
     public X_PA_DashboardContent (Properties ctx, int PA_DashboardContent_ID, String trxName)
@@ -47,8 +47,8 @@ public class X_PA_DashboardContent extends PO implements I_PA_DashboardContent, 
 // Y
 			setIsEmbedReportContent (false);
 // N
-			setIsMaximizable (false);
-// N
+			setIsMaximizable (true);
+// Y
 			setIsShowInDashboard (true);
 // 'Y'
 			setIsShowTitle (true);
@@ -70,8 +70,8 @@ public class X_PA_DashboardContent extends PO implements I_PA_DashboardContent, 
 // Y
 			setIsEmbedReportContent (false);
 // N
-			setIsMaximizable (false);
-// N
+			setIsMaximizable (true);
+// Y
 			setIsShowInDashboard (true);
 // 'Y'
 			setIsShowTitle (true);
@@ -610,6 +610,33 @@ public class X_PA_DashboardContent extends PO implements I_PA_DashboardContent, 
 	public int getPA_Goal_ID()
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_PA_Goal_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public org.compiere.model.I_PA_Goal_Set getPA_Goal_Set() throws RuntimeException
+	{
+		return (org.compiere.model.I_PA_Goal_Set)MTable.get(getCtx(), org.compiere.model.I_PA_Goal_Set.Table_ID)
+			.getPO(getPA_Goal_Set_ID(), get_TrxName());
+	}
+
+	/** Set Performance Measure Set.
+		@param PA_Goal_Set_ID Performance Measure Set
+	*/
+	public void setPA_Goal_Set_ID (int PA_Goal_Set_ID)
+	{
+		if (PA_Goal_Set_ID < 1)
+			set_Value (COLUMNNAME_PA_Goal_Set_ID, null);
+		else
+			set_Value (COLUMNNAME_PA_Goal_Set_ID, Integer.valueOf(PA_Goal_Set_ID));
+	}
+
+	/** Get Performance Measure Set.
+		@return Performance Measure Set	  */
+	public int getPA_Goal_Set_ID()
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_PA_Goal_Set_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
