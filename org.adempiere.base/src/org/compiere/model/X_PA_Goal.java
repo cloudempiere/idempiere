@@ -26,7 +26,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Model for PA_Goal
  *  @author iDempiere (generated) 
- *  @version Release 9 - $Id$ */
+ *  @version Release 10 - $Id$ */
 @org.adempiere.base.Model(table="PA_Goal")
 public class X_PA_Goal extends PO implements I_PA_Goal, I_Persistent 
 {
@@ -34,7 +34,7 @@ public class X_PA_Goal extends PO implements I_PA_Goal, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20220116L;
+	private static final long serialVersionUID = 20220930L;
 
     /** Standard Constructor */
     public X_PA_Goal (Properties ctx, int PA_Goal_ID, String trxName)
@@ -44,6 +44,8 @@ public class X_PA_Goal extends PO implements I_PA_Goal, I_Persistent
         {
 			setChartType (null);
 // BC
+			setGoalDisplay (null);
+// G
 			setGoalPerformance (Env.ZERO);
 			setIsSummary (false);
 			setMeasureActual (Env.ZERO);
@@ -66,6 +68,8 @@ public class X_PA_Goal extends PO implements I_PA_Goal, I_Persistent
         {
 			setChartType (null);
 // BC
+			setGoalDisplay (null);
+// G
 			setGoalPerformance (Env.ZERO);
 			setIsSummary (false);
 			setMeasureActual (Env.ZERO);
@@ -276,6 +280,28 @@ public class X_PA_Goal extends PO implements I_PA_Goal, I_Persistent
 		if (bd == null)
 			 return Env.ZERO;
 		return bd;
+	}
+
+	/** Set Allow Open Performance Detail.
+		@param IsAllowOpenPerformanceDetail Allow Open Performance Detail
+	*/
+	public void setIsAllowOpenPerformanceDetail (boolean IsAllowOpenPerformanceDetail)
+	{
+		set_Value (COLUMNNAME_IsAllowOpenPerformanceDetail, Boolean.valueOf(IsAllowOpenPerformanceDetail));
+	}
+
+	/** Get Allow Open Performance Detail.
+		@return Allow Open Performance Detail	  */
+	public boolean isAllowOpenPerformanceDetail()
+	{
+		Object oo = get_Value(COLUMNNAME_IsAllowOpenPerformanceDetail);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
 	}
 
 	/** Set Summary Level.
