@@ -317,8 +317,9 @@ public class WColorEditor extends WEditor implements ContextMenuListener
 		if (value == null) {
 			return "";
 		} else {
-			String style = getBackgroundFillStyle(value.toString());
-			return "<div style='" + style + "'>"+value.toString()+"</div>";
+			return "<div class='z-grid-color-fieldtype-wrapper'>"
+					+ "	<div class='z-grid-color-fieldtype' style='background: "+value.toString()+";'></div>"
+					+ "</div>";
 		}
 	}
 
