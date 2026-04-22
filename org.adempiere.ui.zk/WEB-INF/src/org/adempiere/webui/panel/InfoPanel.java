@@ -3241,27 +3241,6 @@ public abstract class InfoPanel extends Window implements EventListener<Event>, 
 	}
 
 	/**
-	 * Set and load pgNo as active page
-	 * @param pgNo
-	 */
-	private void setAndLoadActivePage(int pgNo) {
-		paging.setActivePage(pgNo);
-		contentPanel.clearSelection();
-		pageNo = pgNo;
-		int start = pageNo * pageSize;
-		int end = getOverIntValue ((long)start + pageSize, extra_max_row);
-		if (end >= m_count)
-			end = m_count;
-		List<Object> subList = readLine(start, end);
-		model = new ListModelTable(subList);
-		model.setSorter(this);
-        model.addTableModelListener(this);
-        model.setMultiple(p_multipleSelection);
-        contentPanel.setData(model, null);
-        addAllCurrentContentPanelToSelected();
-	}
-
-	/**
 	 * Add all the records from current content panel to selected records
 	 */
 	private void addAllCurrentContentPanelToSelected() {
