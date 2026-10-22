@@ -2210,6 +2210,34 @@ public class GridTabTest extends AbstractTestCase {
 		}
 	}
 
+	/**
+	 * FindOverMax is a warning when a query returns more records than max rows,
+	 * but only info when the same query is run again by a refresh (e.g. after save).
+	 */
+	@Test
+	void testFindOverMaxNotWarnedOnRefresh() {
+		GridWindow gw = GridWindowTest.createGridWindow(SystemIDs.WINDOW_SALES_ORDER);
+		GridTab gt = gw.getTab(0);
+		List<DataStatusEvent> overMaxEvents = Collections.synchronizedList(new ArrayList<>());
+		gt.getTableModel().addDataStatusListener(e -> {
+			if (GridTable.FIND_OVER_MAX_ERROR_MESSAGE.equals(e.getAD_Message()))
+				overMaxEvents.add(e);
+		});
+
+		gt.query(false, 0, 2);
+		gt.getTableModel().loadComplete();
+		assertEquals(1, overMaxEvents.size(), "Query over max rows must report FindOverMax");
+		assertTrue(overMaxEvents.get(0).isWarning(), "FindOverMax must be a warning when a query is run");
+
+		overMaxEvents.clear();
+		gt.dataRefreshAll(true, true);
+		gt.getTableModel().loadComplete();
+		assertEquals(1, overMaxEvents.size(), "Refresh over max rows must still report FindOverMax");
+		assertFalse(overMaxEvents.get(0).isWarning(), "FindOverMax must not warn again when the same query is refreshed");
+
+		gw.dispose();
+	}
+
 	private StringBuilder createSelectSQL(GridTable tableModel) {
 		// Create SELECT Part (copy from GridTable)
 		StringBuilder select = new StringBuilder("SELECT ");

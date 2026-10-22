@@ -615,6 +615,18 @@ public class GridTable extends AbstractTableModel
 	 */
 	public boolean open (int maxRows)
 	{
+		return open(maxRows, false);
+	}	//	open
+
+	/**
+	 *	Open connection to db and load data from table.
+	 *	@param maxRows maximum number of rows or 0 for all
+	 *	@param refresh true when the current query is run again (refresh after save):
+	 *	the user is not warned again about records over maxRows
+	 *	@return true if success
+	 */
+	private boolean open (int maxRows, boolean refresh)
+	{
 		if (log.isLoggable(Level.INFO)) log.info("MaxRows=" + maxRows);
 		m_maxRows = maxRows;
 		if (m_open)
@@ -645,6 +657,7 @@ public class GridTable extends AbstractTableModel
 
 		//	Start Loading
 		m_loader = new Loader();
+		m_loader.isWarnFindOverMax = !refresh;
 		m_loaderFuture = null;
 		m_rowCount = m_loader.open(maxRows);
 		if (m_virtual)
@@ -2486,11 +2499,11 @@ public class GridTable extends AbstractTableModel
 					tempWhere = "((" + tempWhere + orRetainedWhere.toString();
 			}
 			m_whereClause = new SQLFragment(tempWhere, m_whereClause != null ? m_whereClause.parameters() : null);
-			open(m_maxRows);
+			open(m_maxRows, true);
 		}
 		else
 		{
-			open(m_maxRows);
+			open(m_maxRows, true);
 		}
 		//	Info
 		m_rowData = null;
@@ -3039,6 +3052,8 @@ public class GridTable extends AbstractTableModel
 		private Properties m_context = null;
 		private int maxRows;
 		private int rows;
+		/** false when the current query is run again, FindOverMax is then shown as info only */
+		private boolean isWarnFindOverMax = true;
 		
 		public void setContext(Properties context)
 		{
@@ -3265,7 +3280,7 @@ public class GridTable extends AbstractTableModel
 				DataStatusEvent evt = createDSE();
 				evt.setLoading(m_sort.size());
 				if (isFindOverMax)
-					evt.setInfo(FIND_OVER_MAX_ERROR_MESSAGE, " > " + m_sort.size(), false, true);
+					evt.setInfo(FIND_OVER_MAX_ERROR_MESSAGE, " > " + m_sort.size(), false, isWarnFindOverMax);
 				else
 					evt.setInfo(BACKGROUND_LOAD_FINISHED_INFO_MESSAGE, null, false, false);
 				fireDataStatusChanged(evt);
@@ -3279,7 +3294,7 @@ public class GridTable extends AbstractTableModel
 			{
 				DataStatusEvent evt = createDSE();
 				evt.setLoading(m_sort.size());
-				evt.setInfo(FIND_OVER_MAX_ERROR_MESSAGE, " > " + m_sort.size(), false, true);
+				evt.setInfo(FIND_OVER_MAX_ERROR_MESSAGE, " > " + m_sort.size(), false, isWarnFindOverMax);
 				fireDataStatusChanged(evt);
 			}
 
