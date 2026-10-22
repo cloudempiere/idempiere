@@ -2377,8 +2377,8 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 		dataStatusEvent.setCurrentRow(m_currentRow);
 		dataStatusEvent.setValue(fieldValue);
 		
-		//  Same row - update value
-		if (oldCurrentRow == m_currentRow)
+		//  Same row - update value (no current row yet: redistribute, e.g. FindOverMax from the loader)
+		if (oldCurrentRow == m_currentRow && m_currentRow >= 0)
 		{
 			if (field != null)
 			{

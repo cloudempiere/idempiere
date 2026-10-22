@@ -2211,23 +2211,32 @@ public class GridTabTest extends AbstractTestCase {
 	}
 
 	/**
-	 * FindOverMax is a warning when a query returns more records than max rows,
-	 * but only info when the same query is run again by a refresh (e.g. after save).
+	 * FindOverMax reaches the GridTab listeners (the window) as a warning when a query returns more
+	 * records than max rows, but only as info when the same query is run again by a refresh (e.g. after save).
 	 */
 	@Test
 	void testFindOverMaxNotWarnedOnRefresh() {
 		GridWindow gw = GridWindowTest.createGridWindow(SystemIDs.WINDOW_SALES_ORDER);
 		GridTab gt = gw.getTab(0);
 		List<DataStatusEvent> overMaxEvents = Collections.synchronizedList(new ArrayList<>());
-		gt.getTableModel().addDataStatusListener(e -> {
+		gt.addDataStatusListener(e -> {
 			if (GridTable.FIND_OVER_MAX_ERROR_MESSAGE.equals(e.getAD_Message()))
 				overMaxEvents.add(e);
 		});
 
 		gt.query(false, 0, 2);
 		gt.getTableModel().loadComplete();
-		assertEquals(1, overMaxEvents.size(), "Query over max rows must report FindOverMax");
+		assertEquals(1, overMaxEvents.size(), "Query over max rows must report FindOverMax to the tab listeners");
 		assertTrue(overMaxEvents.get(0).isWarning(), "FindOverMax must be a warning when a query is run");
+
+		overMaxEvents.clear();
+		MQuery query = new MQuery(MOrder.Table_Name);
+		query.addRestriction(MOrder.COLUMNNAME_DateOrdered, MQuery.GREATER_EQUAL, Timestamp.valueOf("2000-01-01 00:00:00"));
+		gt.setQuery(query);
+		gt.query(false, 0, 2);
+		gt.getTableModel().loadComplete();
+		assertEquals(1, overMaxEvents.size(), "Requery over max rows must report FindOverMax to the tab listeners");
+		assertTrue(overMaxEvents.get(0).isWarning(), "FindOverMax must be a warning when a new query is run");
 
 		overMaxEvents.clear();
 		gt.dataRefreshAll(true, true);
